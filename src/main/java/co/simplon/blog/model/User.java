@@ -1,11 +1,10 @@
 package co.simplon.blog.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 
@@ -23,18 +22,15 @@ public class User  {
     @Column(unique = true)
     private String name;
 
-    @Column(unique = true)
-    private String githubLogin;
-
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @ManyToOne
     private Role role;
 
-    public User(String githubLogin, String name, Role role) {
-        this.githubLogin = githubLogin;
+    public User(String name, String password, Role role) {
         this.name = name;
+        this.password = password;
         this.role = role;
     }
 }

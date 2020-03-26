@@ -40,6 +40,7 @@ public class PostController {
         return message;
     }
 
+    // TODO utiliser un handle ajout user pour ne pas avoir à écrire ce endpoint et garder par defaut celui du restRepo
     @PostMapping("/api/posts")
     public @ResponseBody Post addNew(@RequestBody Post newPost) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();

@@ -9,6 +9,7 @@ import co.simplon.blog.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -29,12 +30,16 @@ public class DataInitializer implements CommandLineRunner {
 	private PostRepository postRepository;
 	private RoleRepository roleRepository;
 	private UserRepository userRepository;
+	private BCryptPasswordEncoder passwordEncoder;
+
 
 	public DataInitializer(final PostRepository postRepository, final RoleRepository roleRepository,
-                           final UserRepository userRepository) {
+                           final UserRepository userRepository, final BCryptPasswordEncoder passwordEncoder
+	) {
 		this.postRepository = postRepository;
 		this.roleRepository = roleRepository;
 		this.userRepository = userRepository;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	public void initData() {
@@ -43,8 +48,8 @@ public class DataInitializer implements CommandLineRunner {
 			Role userRole = new Role("USER");
 			Role adminRole = new Role("ADMIN");
 
-			User jojo = new User("jojo23457","jtobelem@simplon.co", userRole);
-			User capo = new User("jtobelem-simplon","capo", adminRole);
+			User jojo = new User("jojo", passwordEncoder.encode("ThisIsNotAPassword"), userRole);
+			User capo = new User("capo", passwordEncoder.encode("ThisIsNotAStrongPassword"), adminRole);
 
 			Post post1 = new Post("Début", "Au premier jour il n'y avait rien", LocalDateTime.of(0,1,1,0,0,0), jojo);
 			Post post2 = new Post("Encore", "Puis quelqu'un dit hello", LocalDateTime.now(), jojo);
