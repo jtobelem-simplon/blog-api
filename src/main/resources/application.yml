@@ -1,0 +1,38 @@
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+    org.springframework.security.oauth2: INFO
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_blog
+    username: simplon
+    password: simplon.co
+
+okta:
+  oauth2:
+    issuer: https://dev-950165.okta.com/oauth2/default
+    client-id: 0oa40db0tL2NyKyP84x6
+    client-secret: l5QCnEjbSrd2UrzoKGw0zrCbugy_pUer2IQ4Nu5y
+    rolesClaim: groups
+
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          github:
+#            clientId: 28714885a64116c3919a
+#            clientSecret: 87f6f2dd249ea4bf9d9c5a08be5325675bce37d3
+
+#          google:
+#            clientId: 599971012652-baq0ipfnmts13jjik091a8uoplv140oc.apps.googleusercontent.com
+#            clientSecret: i-PrZszoy4J9jtyp8-XBMQXu
+
+
