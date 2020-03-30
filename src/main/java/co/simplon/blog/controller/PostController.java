@@ -14,6 +14,7 @@ import java.util.Optional;
 
 
 @RestController
+@RequestMapping(path = "/api/posts")
 public class PostController {
 
     @Autowired
@@ -22,26 +23,17 @@ public class PostController {
     @Autowired
     private PostRepository postRepository;
 
+    // TODO ne pas avoir à écrire ce endpoint et garder par defaut celui du restRepo
     @GetMapping
-    @RequestMapping(path = "/home/posts")
+    @RequestMapping
     public @ResponseBody
     Iterable<Post> getAll() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName(); // TODO
-
+        String username = SecurityContextHolder.getContext().getAuthentication().getName(); // TODO remove this line
         return postRepository.findAll();
     }
 
-    @GetMapping("/error")
-    @ResponseBody
-    public String error(HttpServletRequest request) {
-
-        String message = (String) request.getSession().getAttribute("error.message");
-        request.getSession().removeAttribute("error.message");
-        return message;
-    }
-
     // TODO utiliser un handle ajout user pour ne pas avoir à écrire ce endpoint et garder par defaut celui du restRepo
-    @PostMapping("/api/posts")
+    @PostMapping
     public @ResponseBody Post addNew(@RequestBody Post newPost) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
 

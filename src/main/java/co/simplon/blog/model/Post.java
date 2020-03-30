@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -24,6 +26,7 @@ public class Post {
     private LocalDateTime dateTime;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User author;
 
     public Post(String title, String content, LocalDateTime dateTime, User author) {

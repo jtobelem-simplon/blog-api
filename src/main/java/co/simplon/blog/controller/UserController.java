@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.Map;
+
 @RestController
 @RequestMapping(path = "/api")
 public class UserController {
@@ -39,19 +42,28 @@ public class UserController {
      * @return a JWT if sign in is ok, a bad response code otherwise.
      */
     @PostMapping("/sign-in")
-    public ResponseEntity<String> signIn(@RequestBody User user) {
+    public @ResponseBody ResponseEntity<Map> signIn(@RequestBody User user) {
         try {
-            return ResponseEntity.ok(signService.signin(user.getName(), user.getPassword()));
+            String token = signService.signin(user.getName(), user.getPassword());
+            return ResponseEntity.ok(Collections.singletonMap("access_token",token));
         } catch (Exception ex) {
             return ResponseEntity.badRequest().build();
         }
     }
 
-    //    @PreAuthorize("hasAuthority('Admin')") TODO
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')") // TODO ne pas écrire cette méthode
     @GetMapping("/users")
     public @ResponseBody
     Iterable<User> getAll() {
         return userRepository.findAll();
     }
+
+
+    @PreAuthorize("hasAuthority('ADMIN')") // TODO ne pas écrire cette méthode
+    @DeleteMapping("/users")
+    public void delete(@PathVariable long userID) {
+        userRepository.deleteById(userID);
+    }
+
+
 }

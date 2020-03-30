@@ -4,6 +4,7 @@ import co.simplon.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -64,6 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()//
                 .antMatchers("/api/sign-in").permitAll()//
                 .antMatchers("/api/sign-up").permitAll()//
+                .antMatchers(HttpMethod.GET, "/api/posts").permitAll()//
                 // Disallow everything else...
                 .anyRequest().authenticated();
 
