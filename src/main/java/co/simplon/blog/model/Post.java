@@ -1,9 +1,6 @@
 package co.simplon.blog.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -35,4 +32,5 @@ public class Post {
         this.dateTime = dateTime;
         this.author = author;
     }
+
 }

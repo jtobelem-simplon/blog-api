@@ -66,11 +66,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/sign-in").permitAll()//
                 .antMatchers("/api/sign-up").permitAll()//
                 .antMatchers(HttpMethod.GET, "/api/posts").permitAll()//
+                .antMatchers("/h2-console/**").permitAll()
                 // Disallow everything else...
                 .anyRequest().authenticated();
 
         // Apply JWT
         http.addFilterBefore(new JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
+
+        http.headers().frameOptions().disable();
+
     }
 
     @Bean

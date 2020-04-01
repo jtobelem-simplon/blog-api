@@ -55,6 +55,7 @@ public class DataInitializer implements CommandLineRunner {
 			Post post2 = new Post("Encore", "Puis quelqu'un dit hello", LocalDateTime.now(), jojo);
 			Post post3 = new Post("Hello", "Hello Jojo!", LocalDateTime.now(), capo);
 
+			deleteAll();
 
 			if (!roleRepository.findAll().iterator().hasNext()) {
 				roleRepository.saveAll(Arrays.asList(userRole, adminRole));
@@ -71,6 +72,12 @@ public class DataInitializer implements CommandLineRunner {
 			logger.error("Exception while inserting mock data {}", ex);
 		}
 
+	}
+
+	private void deleteAll() {
+		postRepository.deleteAll();
+		userRepository.deleteAll();
+		roleRepository.deleteAll();
 	}
 
 	public void logCreated(){
