@@ -24,12 +24,12 @@ spring:
     console:
       enabled: true
 
-okta:
-  oauth2:
-    issuer: https://dev-950165.okta.com/oauth2/default
-    client-id: 0oa40db0tL2NyKyP84x6
-    client-secret: l5QCnEjbSrd2UrzoKGw0zrCbugy_pUer2IQ4Nu5y
-    rolesClaim: groups
+#okta:
+#  oauth2:
+#    issuer: https://dev-950165.okta.com/oauth2/default
+#    client-id: 0oa40db0tL2NyKyP84x6
+#    client-secret: l5QCnEjbSrd2UrzoKGw0zrCbugy_pUer2IQ4Nu5y
+#    rolesClaim: groups
 
 #  security:
 #    oauth2:
