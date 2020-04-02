@@ -42,7 +42,7 @@ public class SignServiceTests {
 
         when(this.userRepository.findByName(usr)).thenReturn(Optional.of(user));
 
-        assertThrows(InternalAuthenticationServiceException.class, () -> this.signService.signin("toto", pwd));
+        assertThrows(BadCredentialsException.class, () -> this.signService.signin("toto", pwd));
     }
 
     @Test
