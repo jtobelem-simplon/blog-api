@@ -65,6 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()//
                 .antMatchers("/api/sign-in").permitAll()//
                 .antMatchers("/api/sign-up").permitAll()//
+                .antMatchers("/api/init").permitAll()//
                 .antMatchers(HttpMethod.GET, "/api/posts").permitAll()//
                 .antMatchers("/h2-console/**").permitAll()
                 // Disallow everything else...

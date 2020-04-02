@@ -48,6 +48,8 @@ public class DataInitializer implements CommandLineRunner {
 			Role userRole = new Role("USER");
 			Role adminRole = new Role("ADMIN");
 
+			User lp4 = new User("lp4", passwordEncoder.encode("lp4"), userRole);
+			User admin = new User("admin", passwordEncoder.encode("admin"), adminRole);
 			User jojo = new User("jojo", passwordEncoder.encode("ThisIsNotAPassword"), userRole);
 			User capo = new User("capo", passwordEncoder.encode("ThisIsNotAStrongPassword"), adminRole);
 
@@ -61,7 +63,7 @@ public class DataInitializer implements CommandLineRunner {
 				roleRepository.saveAll(Arrays.asList(userRole, adminRole));
 			}
 			if (!userRepository.findAll().iterator().hasNext()) {
-				userRepository.saveAll(Arrays.asList(jojo, capo));
+				userRepository.saveAll(Arrays.asList(jojo, capo, lp4, admin));
 			}
 			if (!postRepository.findAll().iterator().hasNext()) {
 				postRepository.saveAll(Arrays.asList(post1, post2, post3));
