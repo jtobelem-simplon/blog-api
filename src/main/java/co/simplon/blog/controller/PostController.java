@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/posts")
+@CrossOrigin(origins = "*")
 public class PostController {
 
     @Autowired
