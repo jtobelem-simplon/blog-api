@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 /**
@@ -50,12 +51,12 @@ public class DataInitializer implements CommandLineRunner {
 
 			User lp4 = new User("lp4", passwordEncoder.encode("lp4"), userRole);
 			User admin = new User("admin", passwordEncoder.encode("admin"), adminRole);
-			User jojo = new User("jojo", passwordEncoder.encode("ThisIsNotAPassword"), userRole);
-			User capo = new User("capo", passwordEncoder.encode("ThisIsNotAStrongPassword"), adminRole);
+			User starJS = new User("starJS", passwordEncoder.encode("ThisIsNotAPassword"), userRole);
+			User sangoku = new User("sangoku", passwordEncoder.encode("ThisIsNotAStrongPassword"), adminRole);
 
-			Post post1 = new Post("Début", "Au premier jour il n'y avait rien", LocalDateTime.of(0,1,1,0,0,0), jojo);
-			Post post2 = new Post("Encore", "Puis quelqu'un dit hello", LocalDateTime.now(), jojo);
-			Post post3 = new Post("Hello", "Hello Jojo!", LocalDateTime.now(), capo);
+			Post post1 = new Post("Début", "Au premier jour il n'y avait rien", LocalDateTime.of(0,1,1,0,0,0), starJS);
+			Post post2 = new Post("Encore", "Puis quelqu'un dit hello", LocalDateTime.now(), starJS);
+			Post post3 = new Post("Hello", "Hello starJS!", LocalDateTime.now(), sangoku);
 
 			deleteAll();
 
@@ -63,7 +64,7 @@ public class DataInitializer implements CommandLineRunner {
 				roleRepository.saveAll(Arrays.asList(userRole, adminRole));
 			}
 			if (!userRepository.findAll().iterator().hasNext()) {
-				userRepository.saveAll(Arrays.asList(jojo, capo, lp4, admin));
+				userRepository.saveAll(Arrays.asList(starJS, sangoku, lp4, admin));
 			}
 			if (!postRepository.findAll().iterator().hasNext()) {
 				postRepository.saveAll(Arrays.asList(post1, post2, post3));
@@ -90,9 +91,11 @@ public class DataInitializer implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		logger.info("******** Initializing Data ***********");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+
+		logger.info("******** Initializing Data at {} ***********", LocalDateTime.now().format(formatter));
 		initData();
 		logCreated();
-		logger.info("******** Data initialized ***********");
+		logger.info("******** Data initialized at {} ***********", LocalDateTime.now().format(formatter));
 	}
 }
