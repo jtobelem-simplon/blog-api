@@ -24,3 +24,4 @@ These additional references should also help you:
 
 https://help.github.com/en/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
+![Java CI with Gradle](https://github.com/jtobelem-simplon/blog-api/workflows/Java%20CI%20with%20Gradle/badge.svg?event=push)
