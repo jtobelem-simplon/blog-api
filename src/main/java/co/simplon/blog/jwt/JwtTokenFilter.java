@@ -1,4 +1,4 @@
-package co.simplon.blog.security;
+package co.simplon.blog.jwt;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;

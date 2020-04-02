@@ -1,8 +1,9 @@
-package co.simplon.blog.security;
+package co.simplon.blog.service;
 
 import co.simplon.blog.exception.ExistingUsernameException;
 import co.simplon.blog.model.User;
 import co.simplon.blog.repository.UserRepository;
+import co.simplon.blog.jwt.JwtTokenProvider;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

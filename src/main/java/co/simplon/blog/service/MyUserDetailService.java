@@ -1,39 +1,33 @@
-package co.simplon.blog.security;
+package co.simplon.blog.service;
 
+import co.simplon.blog.model.User;
 import co.simplon.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.util.Arrays;
 import java.util.Optional;
 
-@EnableWebSecurity
-@Service("userDetailsService")
-public class UserDetailService implements UserDetailsService {
+@Service
+public class MyUserDetailService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
 
-    @Transactional()
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("yo");
-        final Optional<co.simplon.blog.model.User> user = userRepository.findByName(username);
+        final Optional<User> user = userRepository.findByName(username);
 
         if (!user.isPresent()) {
-            throw new UsernameNotFoundException("AppUser '" + username + "' not found");
+            throw new UsernameNotFoundException("User '" + username + "' not found");
         }
 
-        return User
+        return org.springframework.security.core.userdetails.User
                 .withUsername(username)
                 .password(user.get().getPassword())
-                .authorities(Arrays.asList(user.get().getRole()))
+                .authorities(user.get().getRole())
                 .accountExpired(false)
                 .accountLocked(false)
                 .credentialsExpired(false)

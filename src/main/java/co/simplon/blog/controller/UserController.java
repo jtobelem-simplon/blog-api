@@ -4,7 +4,7 @@ import co.simplon.blog.DataInitializer;
 import co.simplon.blog.exception.ExistingUsernameException;
 import co.simplon.blog.model.User;
 import co.simplon.blog.repository.UserRepository;
-import co.simplon.blog.security.SignService;
+import co.simplon.blog.service.SignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -50,13 +50,16 @@ public class UserController {
      */
     @PostMapping("/sign-in")
     public @ResponseBody
-    ResponseEntity<Map> signIn(@RequestBody User user) {
-        try {
+//    ResponseEntity<Map> signIn(@RequestBody User user) {
+    Map signIn(@RequestBody User user) {
+//        try {
             String token = signService.signin(user.getName(), user.getPassword());
-            return ResponseEntity.ok(Collections.singletonMap("access_token", token));
-        } catch (Exception ex) {
-            return ResponseEntity.badRequest().build();
-        }
+            return Collections.singletonMap("access_token", token);
+//            return ResponseEntity.ok(Collections.singletonMap("access_token", token));
+//        }
+//        catch (Exception ex) {
+//            return ResponseEntity.badRequest().build();
+//        }
     }
 
     @GetMapping("/init")

@@ -24,7 +24,7 @@ public class User  {
     @Column(unique = true)
     private String name;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // TODO commenté pour le junit ...
     private String password;
 
     @ManyToOne

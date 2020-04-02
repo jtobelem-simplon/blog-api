@@ -1,6 +1,8 @@
-package co.simplon.blog.security;
+package co.simplon.blog.configuration;
 
 import co.simplon.blog.repository.UserRepository;
+import co.simplon.blog.jwt.JwtTokenFilter;
+import co.simplon.blog.jwt.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -78,26 +80,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
-    @Bean
-    @Override
-    protected UserDetailsService userDetailsService() {
-        return username -> {
-            final Optional<co.simplon.blog.model.User> user = userRepository.findByName(username);
-
-            if (!user.isPresent()) {
-                throw new UsernameNotFoundException("User '" + username + "' not found");
-            }
-
-            return User
-                    .withUsername(username)
-                    .password(user.get().getPassword())
-                    .authorities(user.get().getRole())
-                    .accountExpired(false)
-                    .accountLocked(false)
-                    .credentialsExpired(false)
-                    .disabled(false)
-                    .build();
-
-        };
-    }
 }

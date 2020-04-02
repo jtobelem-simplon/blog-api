@@ -58,8 +58,6 @@ public class DataInitializer implements CommandLineRunner {
 			Post post2 = new Post("Encore", "Puis quelqu'un dit hello", LocalDateTime.now(), starJS);
 			Post post3 = new Post("Hello", "Hello starJS!", LocalDateTime.now(), sangoku);
 
-			deleteAll();
-
 			if (!roleRepository.findAll().iterator().hasNext()) {
 				roleRepository.saveAll(Arrays.asList(userRole, adminRole));
 			}
@@ -94,6 +92,7 @@ public class DataInitializer implements CommandLineRunner {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
 		logger.info("******** Initializing Data at {} ***********", LocalDateTime.now().format(formatter));
+//		deleteAll();
 		initData();
 		logCreated();
 		logger.info("******** Data initialized at {} ***********", LocalDateTime.now().format(formatter));
