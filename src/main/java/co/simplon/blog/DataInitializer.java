@@ -92,7 +92,7 @@ public class DataInitializer implements CommandLineRunner {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
 		logger.info("******** Initializing Data at {} ***********", LocalDateTime.now().format(formatter));
-//		deleteAll();
+		deleteAll();
 		initData();
 		logCreated();
 		logger.info("******** Data initialized at {} ***********", LocalDateTime.now().format(formatter));

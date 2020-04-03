@@ -1,8 +1,8 @@
 package co.simplon.blog.configuration;
 
-import co.simplon.blog.repository.UserRepository;
 import co.simplon.blog.jwt.JwtTokenFilter;
 import co.simplon.blog.jwt.JwtTokenProvider;
+import co.simplon.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,14 +13,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import java.util.Optional;
 
 /**
  * Global security configuration for our HTTP Rest API.
@@ -70,6 +64,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/init").permitAll()//
                 .antMatchers(HttpMethod.GET, "/api/posts").permitAll()//
                 .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/v2/api-docs/**").permitAll()
+
                 // Disallow everything else...
                 .anyRequest().authenticated();
 

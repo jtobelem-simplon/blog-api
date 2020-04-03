@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -26,10 +25,8 @@ public class PostController {
 
     // TODO ne pas avoir à écrire ce endpoint et garder par defaut celui du restRepo
     @GetMapping
-    @RequestMapping
     public @ResponseBody
     Iterable<Post> getAll() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName(); // TODO remove this line
         return postRepository.findAll();
     }
 
@@ -39,7 +36,6 @@ public class PostController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
         Optional<User> user = userRepository.findByName(username);
-        System.out.println(username);
 
         if (user.isPresent()) {
             newPost.setAuthor(user.get());

@@ -6,10 +6,12 @@ import co.simplon.blog.repository.UserRepository;
 import co.simplon.blog.jwt.JwtTokenProvider;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 @Service
 public class SignService {
@@ -31,7 +33,14 @@ public class SignService {
 
     public String signin(String username, String password) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        return jwtTokenProvider.createToken(username, Arrays.asList(userRepository.findByName(username).get().getRole()));
+        Optional<User> user = userRepository.findByName(username);
+
+        if (user.isPresent()) {
+            return jwtTokenProvider.createToken(username, Arrays.asList(user.get().getRole()));
+        }
+        else {
+            throw new UsernameNotFoundException("User '" + username + "' not found");
+        }
     }
 
     public String signup(User user) throws ExistingUsernameException {

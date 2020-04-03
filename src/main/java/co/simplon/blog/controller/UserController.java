@@ -50,16 +50,9 @@ public class UserController {
      */
     @PostMapping("/sign-in")
     public @ResponseBody
-//    ResponseEntity<Map> signIn(@RequestBody User user) {
     Map signIn(@RequestBody User user) {
-//        try {
-            String token = signService.signin(user.getName(), user.getPassword());
-            return Collections.singletonMap("access_token", token);
-//            return ResponseEntity.ok(Collections.singletonMap("access_token", token));
-//        }
-//        catch (Exception ex) {
-//            return ResponseEntity.badRequest().build();
-//        }
+        String token = signService.signin(user.getName(), user.getPassword());
+        return Collections.singletonMap("access_token", token);
     }
 
     @GetMapping("/init")

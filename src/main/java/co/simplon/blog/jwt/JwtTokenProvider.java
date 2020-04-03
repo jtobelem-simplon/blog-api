@@ -1,6 +1,7 @@
 package co.simplon.blog.jwt;
 
 import co.simplon.blog.model.Role;
+import co.simplon.blog.service.MyUserDetailService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -35,9 +36,8 @@ public class JwtTokenProvider {
     @Value("${security.jwt.token.expire-length:3600000}")
     private long validityInMilliseconds = 3600000; // 1h
 
-    @Qualifier("myUserDetailService")
     @Autowired
-    private UserDetailsService userDetailsService;
+    private MyUserDetailService userDetailsService;
 
     /**
      * Method that encodes our secret to base64 format to enable HMAC signature (as header and payload are also in base64).
