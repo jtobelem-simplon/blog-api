@@ -56,8 +56,8 @@ public class UserController {
     }
 
     @GetMapping("/init")
-    public void initData() {
-        dataInitializer.initData();
+    public void initData() throws Exception {
+        dataInitializer.run();
     }
 
     @PreAuthorize("hasAuthority('ADMIN')") // TODO ne pas écrire cette méthode
