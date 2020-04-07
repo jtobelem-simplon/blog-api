@@ -1,12 +1,18 @@
 package co.simplon.blog.model;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * @author Josselin Tobelem
+ */
 @Entity
 @Getter
 @Setter

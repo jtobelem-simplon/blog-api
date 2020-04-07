@@ -18,6 +18,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 /**
  * Global security configuration for our HTTP Rest API.
+ *
+ * @author Josselin Tobelem
  */
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -29,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserRepository userRepository;
 
-    
+
     @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -43,6 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * Method that configures HTTP security.
+     *
      * @param http the HttpSecurity object to configure.
      * @throws Exception
      */

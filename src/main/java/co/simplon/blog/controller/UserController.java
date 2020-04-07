@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 import java.util.Map;
 
+/**
+ * @author Josselin Tobelem
+ */
 @RestController
 @RequestMapping(path = "/api")
 @CrossOrigin(origins = "*")

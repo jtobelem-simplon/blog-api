@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-
+/**
+ * @author Josselin Tobelem
+ */
 @RestController
 @RequestMapping(path = "/api/posts")
 @CrossOrigin(origins = "*")
@@ -32,7 +34,8 @@ public class PostController {
 
     // TODO utiliser un handle ajout user pour ne pas avoir à écrire ce endpoint et garder par defaut celui du restRepo
     @PostMapping
-    public @ResponseBody Post addNew(@RequestBody Post newPost) {
+    public @ResponseBody
+    Post addNew(@RequestBody Post newPost) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
         Optional<User> user = userRepository.findByName(username);

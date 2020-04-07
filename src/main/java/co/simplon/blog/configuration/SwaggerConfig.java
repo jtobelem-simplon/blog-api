@@ -1,6 +1,5 @@
 package co.simplon.blog.configuration;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 //import springfox.documentation.builders.ApiInfoBuilder;
 //import springfox.documentation.builders.PathSelectors;

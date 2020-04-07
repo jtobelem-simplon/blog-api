@@ -1,9 +1,9 @@
 package co.simplon.blog.service;
 
 import co.simplon.blog.exception.ExistingUsernameException;
+import co.simplon.blog.jwt.JwtTokenProvider;
 import co.simplon.blog.model.User;
 import co.simplon.blog.repository.UserRepository;
-import co.simplon.blog.jwt.JwtTokenProvider;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.Optional;
 
+/**
+ * @author Josselin Tobelem
+ */
 @Service
 public class SignService {
 
@@ -37,8 +40,7 @@ public class SignService {
 
         if (user.isPresent()) {
             return jwtTokenProvider.createToken(username, Arrays.asList(user.get().getRole()));
-        }
-        else {
+        } else {
             throw new UsernameNotFoundException("User '" + username + "' not found");
         }
     }

@@ -1,4 +1,3 @@
-
 logging:
   level:
     root: INFO
@@ -12,9 +11,9 @@ spring:
       ddl-auto: update
 
   datasource:
-#    url: jdbc:mysql://localhost:3306/db_blog?serverTimezone=UTC
-#    username: simplon
-#    password: simplon.co
+    #    url: jdbc:mysql://localhost:3306/db_blog?serverTimezone=UTC
+    #    username: simplon
+    #    password: simplon.co
 
     url: jdbc:h2:mem:blog # http://localhost:8080/h2-console pour lancer la console avec l'url : jdbc:h2:mem:blog
     username: sa

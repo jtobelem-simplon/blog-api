@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Optional;
@@ -61,6 +60,6 @@ public class SignServiceTests {
         when(this.userRepository.findByName(usr)).thenReturn(Optional.of(user));
 
         String token = this.signService.signin(usr, pwd);
-        assertEquals(usr, this.jwtTokenProvider.getUsername(token)) ;
+        assertEquals(usr, this.jwtTokenProvider.getUsername(token));
     }
 }

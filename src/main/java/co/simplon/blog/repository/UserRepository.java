@@ -6,6 +6,9 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.Optional;
 
+/**
+ * @author Josselin Tobelem
+ */
 @RepositoryRestResource
 public interface UserRepository extends CrudRepository<User, Long> {
 

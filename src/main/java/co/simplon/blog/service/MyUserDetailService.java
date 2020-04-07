@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * @author Josselin Tobelem
+ */
 @Service
 public class MyUserDetailService implements UserDetailsService {
 
