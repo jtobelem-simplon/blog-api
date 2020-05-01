@@ -16,9 +16,9 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping(path = "/api/posts")
-@CrossOrigin(origins = "*")
 public class PostController {
 
+    // TODO mettre l'injection de dép dans le constructeur
     @Autowired
     private UserRepository userRepository;
 
@@ -36,7 +36,7 @@ public class PostController {
     @PostMapping
     public @ResponseBody
     Post addNew(@RequestBody Post newPost) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName(); // TODO déplacer ceci dans un service
 
         Optional<User> user = userRepository.findByName(username);
 

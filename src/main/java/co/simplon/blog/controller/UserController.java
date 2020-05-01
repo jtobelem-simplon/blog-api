@@ -2,6 +2,7 @@ package co.simplon.blog.controller;
 
 import co.simplon.blog.DataInitializer;
 import co.simplon.blog.exception.ExistingUsernameException;
+import co.simplon.blog.model.Post;
 import co.simplon.blog.model.User;
 import co.simplon.blog.repository.UserRepository;
 import co.simplon.blog.service.SignService;
@@ -18,7 +19,6 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping(path = "/api")
-@CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired
@@ -30,6 +30,22 @@ public class UserController {
     @Autowired
     private SignService signService;
 
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PostMapping("/users")
+    public @ResponseBody
+    User create(@RequestBody User newUser) {
+        return this.signService.create(newUser); // TODO cas d'erreur
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PutMapping("/users")
+    public @ResponseBody
+    User update(@RequestBody User newUser) {
+        // TODO gerer le reinit de password
+        return userRepository.save(newUser);
+    }
+
+    // TODO deplacer les méthodes d'authentif dans un controller a part
     /**
      * Method to register a new user in database.
      *
@@ -37,12 +53,9 @@ public class UserController {
      * @return a JWT if sign up is ok, a bad response code otherwise.
      */
     @PostMapping("/sign-up")
-    public ResponseEntity<String> signUp(@RequestBody User user) {
-        try {
-            return ResponseEntity.ok(signService.signup(user));
-        } catch (ExistingUsernameException ex) {
-            return ResponseEntity.badRequest().build();
-        }
+    public Map signUp(@RequestBody User user) {
+            String token = signService.signup(user);
+        return Collections.singletonMap("access_token", token);
     }
 
     /**
@@ -60,7 +73,7 @@ public class UserController {
 
     @GetMapping("/init")
     public void initData() throws Exception {
-        dataInitializer.run();
+        dataInitializer.run(); // TODO gérer les exception du dataIniti
     }
 
     @PreAuthorize("hasAuthority('ADMIN')") // TODO ne pas écrire cette méthode

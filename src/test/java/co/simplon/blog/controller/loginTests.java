@@ -1,11 +1,14 @@
 package co.simplon.blog.controller;
 
+import co.simplon.blog.DataInitializer;
 import co.simplon.blog.model.Role;
 import co.simplon.blog.model.User;
+import co.simplon.blog.service.MyUserDetailService;
 import co.simplon.blog.service.SignService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,14 +16,20 @@ import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@ExtendWith(SpringExtension.class)
+//@ContextConfiguration(classes = { loginTests.class })
 @SpringBootTest
 @AutoConfigureMockMvc
 public class loginTests {
@@ -30,6 +39,10 @@ public class loginTests {
 
     @MockBean
     private SignService signService;
+
+    @MockBean
+    private DataInitializer dataInitializer;
+
 
     //////////////////////////////////////////////////// variables pour les tests
 
@@ -54,11 +67,15 @@ public class loginTests {
 
     //////////////////////////////////////////////////// fin pour générer un json à partir d'instances
 
+    @BeforeEach
+    public void setup() {
+        when(this.signService.signin(usr, pwd)).thenReturn(token);
+    }
 
     @Test
     public void signinBadCredentials() throws Exception {
         // Configuration du mockService
-        when(this.signService.signin(usr, pwd)).thenReturn(token);
+
         when(this.signService.signin("toto", "toto")).thenThrow(BadCredentialsException.class);
 
         // initialisation des paramètres à envoyer
@@ -77,7 +94,6 @@ public class loginTests {
     @Test
     public void signinPwdOk() throws Exception {
         // Configuration du mockService
-        when(this.signService.signin(usr, pwd)).thenReturn(token);
 
         // initialisation des paramètres à envoyer
         User user = new User(usr, pwd, new Role("TEST"));
@@ -90,6 +106,39 @@ public class loginTests {
         // test du résultat
         result.andExpect(status().isOk())
                 .andExpect(jsonPath("access_token").value(token));
+    }
+
+    @Test
+    public void testInit() throws Exception {
+//        when(this.dataInitializer.run()).then()
+        ResultActions result = mockMvc.perform(get("/api/init"));
+
+        // test du résultat
+        result.andExpect(status().isOk());
+    }
+
+
+
+    //    https://stackoverflow.com/questions/5403818/how-to-junit-tests-a-preauthorize-annotation-and-its-spring-el-specified-by-a-s
+    @Test
+    @WithMockUser(roles={"ADMIN"})
+    public void testGetAllAuthOk() throws Exception {
+
+        ResultActions result = mockMvc.perform(get("/api/users"));
+
+        // test du résultat
+        result.andExpect(status().isOk());
+    }
+
+    @Test
+    public void testGetAllAuthNotOk() throws Exception {
+
+
+        ResultActions result = mockMvc.perform(get("/api/users"));
+
+        // test du résultat
+        result.andExpect(status().isForbidden());
+
     }
 
 }

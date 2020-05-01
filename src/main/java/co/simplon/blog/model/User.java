@@ -8,6 +8,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 /**
  * @author Josselin Tobelem
@@ -32,6 +33,10 @@ public class User {
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE) // TODO utilisé pour les tests, à vérifier
     private Role role;
+
+    private String email;
+
+    private LocalDate birthday;
 
     public User(String name, String password, Role role) {
         this.name = name;

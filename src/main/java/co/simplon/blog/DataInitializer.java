@@ -12,6 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -49,7 +50,13 @@ public class DataInitializer implements CommandLineRunner {
             Role adminRole = new Role("ADMIN");
 
             User lp4 = new User("lp4", passwordEncoder.encode("lp4"), userRole);
+            lp4.setBirthday(LocalDate.of(2019, 10,1));
+            lp4.setEmail("lp4@simplon.co");
+
             User admin = new User("admin", passwordEncoder.encode("admin"), adminRole);
+            admin.setBirthday(LocalDate.of(2020, 1,1));
+            admin.setEmail("admin@simplon.co");
+
             User starJS = new User("starJS", passwordEncoder.encode("ThisIsNotAPassword"), userRole);
             User sangoku = new User("sangoku", passwordEncoder.encode("ThisIsNotAStrongPassword"), adminRole);
 

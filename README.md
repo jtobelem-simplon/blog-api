@@ -1,4 +1,4 @@
-# Getting Started
+# Blog-api
 
 ### Reference Documentation
 For further reference, please consider the following sections:
@@ -8,22 +8,28 @@ For further reference, please consider the following sections:
 * [Spring Web](https://docs.spring.io/spring-boot/docs/2.2.5.RELEASE/reference/htmlsingle/#boot-features-developing-web-applications)
 * [OAuth2 Client](https://docs.spring.io/spring-boot/docs/2.2.5.RELEASE/reference/htmlsingle/#boot-features-security-oauth2-client)
 
-### Guides
-The following guides illustrate how to use some features concretely:
-
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
-
-### Additional Links
-These additional references should also help you:
-
-* [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
+---
 
 ### Tuto
 
-https://help.github.com/en/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+[Sur les tests du backend](https://help.github.com/en/actions/language-and-framework-guides/building-and-testing-java-with-gradle)
+
+### Integration continue
 
 ![Java CI with Gradle](https://github.com/jtobelem-simplon/blog-api/workflows/Java%20CI%20with%20Gradle/badge.svg?event=push)
 
-https://documenter.getpostman.com/view/6373510/SzYaWJTu?version=latest
+### Postman
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/6373510/SzYaWJTu?version=latest)
+
+### Trello
+
+<https://trello.com/b/bSAY2PLI/projet>
+
+### Déploiement
+
+back : https://blog-spring-api.herokuapp.com/   
+front : https://blog-front-3584b.web.app/
+
+[Guide de déploiement sur le cours lp4](https://simplonco.github.io/lp4-2019/session7/deploy/)
+

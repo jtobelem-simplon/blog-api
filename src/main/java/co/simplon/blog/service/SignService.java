@@ -47,11 +47,18 @@ public class SignService {
 
     public String signup(User user) throws ExistingUsernameException {
         if (!userRepository.findByName(user.getName()).isPresent()) {
-            User userToSave = new User(user.getName(), passwordEncoder.encode(user.getPassword()), user.getRole());
-            userRepository.save(userToSave);
+            create(user);
             return jwtTokenProvider.createToken(user.getName(), Arrays.asList(user.getRole()));
         } else {
-            throw new ExistingUsernameException();
+            throw new ExistingUsernameException("User '" + user.getName() + "' already registered");
         }
+    }
+
+    public User create(User user) {
+        if (user.getPassword() == null) {
+            user.setPassword(user.getName());
+        }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
     }
 }

@@ -19,6 +19,12 @@ spring:
     username: sa
     password:
 
+security:
+  jwt:
+    token:
+      secret-key: secret-key
+      expire-length: 300000 # 5 minutes duration by default: 5 minutes * 60 seconds * 1000 miliseconds
+
   h2:
     console:
       enabled: true

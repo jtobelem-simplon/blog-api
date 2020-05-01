@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 @Component
 public class JwtTokenProvider {
 
-    @Value("${security.jwt.token.secret-key:secret-key}")
+    @Value("${security.jwt.token.secret-key:secret-key}") // TODO ajouter dans application.yml et même dans les var d'environnement
     private String secretKey;
 
     @Value("${security.jwt.token.expire-length:3600000}")
