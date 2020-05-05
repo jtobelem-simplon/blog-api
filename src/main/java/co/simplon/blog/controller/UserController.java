@@ -20,6 +20,7 @@ import java.util.Map;
  */
 @AllArgsConstructor
 @RestController
+@PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping(path = "/api/users")
 public class UserController {
 
@@ -27,14 +28,12 @@ public class UserController {
 
     private final SignService signService;
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public @ResponseBody
     User create(@RequestBody User newUser) {
         return this.signService.create(newUser); // TODO cas d'erreur
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping
     public @ResponseBody
     User update(@RequestBody User newUser) {
@@ -42,20 +41,15 @@ public class UserController {
         return userRepository.save(newUser);
     }
 
-
-    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public @ResponseBody
     Iterable<User> getAll() {
         return userRepository.findAll();
     } // TODO passer par le service
 
-
-    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping
     public void delete(@PathVariable long userID) {
         userRepository.deleteById(userID);
     } // TODO passer par le service
-
 
 }

@@ -3,6 +3,7 @@ package co.simplon.blog.configuration;
 import co.simplon.blog.jwt.JwtTokenFilter;
 import co.simplon.blog.jwt.JwtTokenProvider;
 import co.simplon.blog.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,16 +22,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  *
  * @author Josselin Tobelem
  */
+@AllArgsConstructor
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
-
-    @Autowired
-    private UserRepository userRepository;
-
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
     @Override
@@ -62,20 +59,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // Entry points
         http.authorizeRequests()//
-                .antMatchers("/api/sign-in").permitAll()//
-                .antMatchers("/api/sign-up").permitAll()//
+                .antMatchers("/api/sign-in", "/api/sign-up").permitAll()//
                 .antMatchers("/api/init").permitAll()//
                 .antMatchers(HttpMethod.GET, "/api/posts").permitAll()//
                 .antMatchers("/h2-console/**").permitAll()
-                .antMatchers("/v2/api-docs").permitAll()
-                .antMatchers("/webjars/**").permitAll()
-                .antMatchers("/swagger-resources/**").permitAll()
-                .antMatchers("/configuration/**").permitAll()
-                .antMatchers("/swagger-ui.html/**").permitAll()
-//                .antMatchers("/").permitAll()
+                .antMatchers("/v2/api-docs", "/webjars/**", "/swagger-resources/**", "/configuration/**", "/swagger-ui.html/**").permitAll()
+//                .antMatchers("/").permitAll() // TODO ajouter une page racine
 //                .antMatchers("/csrf").permitAll()
-
-
 
                 // Disallow everything else...
                 .anyRequest().authenticated();

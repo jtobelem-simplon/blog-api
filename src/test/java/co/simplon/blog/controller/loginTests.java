@@ -3,6 +3,7 @@ package co.simplon.blog.controller;
 import co.simplon.blog.DataInitializer;
 import co.simplon.blog.model.Role;
 import co.simplon.blog.model.User;
+import co.simplon.blog.repository.UserRepository;
 import co.simplon.blog.service.MyUserDetailService;
 import co.simplon.blog.service.SignService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,6 +22,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -42,6 +46,9 @@ public class loginTests {
 
     @MockBean
     private DataInitializer dataInitializer;
+
+    @MockBean
+    private UserRepository userRepository;
 
 
     //////////////////////////////////////////////////// variables pour les tests
@@ -121,9 +128,9 @@ public class loginTests {
 
     //    https://stackoverflow.com/questions/5403818/how-to-junit-tests-a-preauthorize-annotation-and-its-spring-el-specified-by-a-s
     @Test
-    @WithMockUser(roles={"ADMIN"})
+    @WithMockUser(authorities = {"ADMIN"})
     public void testGetAllAuthOk() throws Exception {
-
+        when(this.userRepository.findAll()).thenReturn(new HashSet());
         ResultActions result = mockMvc.perform(get("/api/users"));
 
         // test du résultat
