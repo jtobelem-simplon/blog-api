@@ -76,7 +76,7 @@ public class DataInitializer implements CommandLineRunner {
 
 
         } catch (final Exception ex) {
-            logger.error("Exception while inserting mock data {}", ex);
+            logger.error("Exception while inserting mock data {0}", ex);
         }
 
     }

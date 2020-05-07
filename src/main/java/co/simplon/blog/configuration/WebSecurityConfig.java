@@ -2,9 +2,7 @@ package co.simplon.blog.configuration;
 
 import co.simplon.blog.jwt.JwtTokenFilter;
 import co.simplon.blog.jwt.JwtTokenProvider;
-import co.simplon.blog.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

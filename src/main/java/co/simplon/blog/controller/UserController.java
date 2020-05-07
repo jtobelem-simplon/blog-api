@@ -1,19 +1,11 @@
 package co.simplon.blog.controller;
 
-import co.simplon.blog.DataInitializer;
-import co.simplon.blog.exception.ExistingUsernameException;
-import co.simplon.blog.model.Post;
 import co.simplon.blog.model.User;
 import co.simplon.blog.repository.UserRepository;
 import co.simplon.blog.service.SignService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collections;
-import java.util.Map;
 
 /**
  * @author Josselin Tobelem
@@ -47,7 +39,7 @@ public class UserController {
         return userRepository.findAll();
     } // TODO passer par le service
 
-    @DeleteMapping
+    @DeleteMapping(path = "/{userID}")
     public void delete(@PathVariable long userID) {
         userRepository.deleteById(userID);
     } // TODO passer par le service

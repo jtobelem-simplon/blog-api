@@ -5,7 +5,6 @@ import co.simplon.blog.model.User;
 import co.simplon.blog.repository.PostRepository;
 import co.simplon.blog.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 

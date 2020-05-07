@@ -28,7 +28,10 @@ For further reference, please consider the following sections:
 
 ### Déploiement
 
-back : https://blog-spring-api.herokuapp.com/   
+back : https://blog-spring-api.herokuapp.com/
+
+swagger : <https://blog-spring-api.herokuapp.com/swagger-ui.html>   
+
 front : https://blog-front-3584b.web.app/
 
 [Guide de déploiement sur le cours lp4](https://simplonco.github.io/lp4-2019/session7/deploy/)

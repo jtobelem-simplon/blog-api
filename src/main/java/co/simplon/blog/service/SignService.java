@@ -45,7 +45,7 @@ public class SignService {
         }
     }
 
-    public String signup(User user) throws ExistingUsernameException {
+    public String signup(User user) {
         if (!userRepository.findByName(user.getName()).isPresent()) {
             create(user);
             return jwtTokenProvider.createToken(user.getName(), Arrays.asList(user.getRole()));

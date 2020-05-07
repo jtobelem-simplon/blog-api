@@ -22,7 +22,7 @@ public class AuthenticationController {
      * @return a JWT if sign up is ok, a bad response code otherwise.
      */
     @PostMapping("/sign-up")
-    public Map signUp(@RequestBody User user) {
+    public Map<String, String> signUp(@RequestBody User user) {
         String token = signService.signup(user);
         return Collections.singletonMap("access_token", token);
     }
@@ -35,7 +35,7 @@ public class AuthenticationController {
      */
     @PostMapping("/sign-in")
     public @ResponseBody
-    Map signIn(@RequestBody User user) {
+    Map<String, String> signIn(@RequestBody User user) {
         String token = signService.signin(user.getName(), user.getPassword());
         return Collections.singletonMap("access_token", token);
     }
